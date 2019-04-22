@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Uploaded\" />
     <Folder Include="Tessdata\" />
   </ItemGroup>
 
