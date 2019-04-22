@@ -51,35 +51,31 @@ namespace VnV_Poc.Controllers
                 {
                     tiff.Save(ms, ImageFormat.Tiff);
                     byte[] Bytes = ms.ToArray();
-                    Debug.WriteLine("1--" + DateTime.Now.Millisecond);
                     ocrResult = await GetTextFromImage(Bytes);
-
-                    Debug.WriteLine("2--" + DateTime.Now.Millisecond);
-
                     Task.Run(() => SaveFile(path, Bytes));
                 }
             }
-            Debug.WriteLine("3--" + DateTime.Now.Millisecond);
+            //Debug.WriteLine("3--" + DateTime.Now.Millisecond);
 
             return Ok(ocrResult);
         }
 
         private async Task SaveFile(string path, byte[] bytes)
         {
-            Debug.WriteLine("SaveFile--1--" + DateTime.Now.Millisecond);
+            //Debug.WriteLine("SaveFile--1--" + DateTime.Now.Millisecond);
 
             using (var fs = new FileStream(path, FileMode.Create))
             {
                 await fs.WriteAsync(bytes, 0, (int)bytes.Length);
             }
-            Debug.WriteLine("SaveFile--2--" + DateTime.Now.Millisecond);
+            //Debug.WriteLine("SaveFile--2--" + DateTime.Now.Millisecond);
 
         }
 
         private async Task<RecogniseImageResult> GetTextFromImage(byte[] tiff)
         {
 
-            Debug.WriteLine("getTextFromImage--1--" + DateTime.Now.Millisecond);
+            //Debug.WriteLine("getTextFromImage--1--" + DateTime.Now.Millisecond);
 
             RecogniseImageResult result;
             using (var engine = new TesseractEngine(@"./tessdata", "fra", EngineMode.Default))
@@ -94,7 +90,7 @@ namespace VnV_Poc.Controllers
                     }
                 }
             }
-            Debug.WriteLine("getTextFromImage--2--" + DateTime.Now.Millisecond);
+            //Debug.WriteLine("getTextFromImage--2--" + DateTime.Now.Millisecond);
 
             return result;
         }
