@@ -52,7 +52,7 @@ namespace VnV_Poc.Controllers
                     tiff.Save(ms, ImageFormat.Tiff);
                     byte[] Bytes = ms.ToArray();
                     ocrResult = await GetTextFromImage(Bytes);
-                    Task.Run(() => SaveFile(path, Bytes));
+                    //Task.Run(() => SaveFile(path, Bytes));
                 }
             }
             //Debug.WriteLine("3--" + DateTime.Now.Millisecond);
@@ -85,8 +85,7 @@ namespace VnV_Poc.Controllers
                     using (var page = engine.Process(img))
                     {
                         string text = page.GetText();
-                        string hocrtext = page.GetHOCRText(0);
-                        result = new RecogniseImageResult() { Text = text, Html = hocrtext };
+                        result = new RecogniseImageResult() { Text = text};
                     }
                 }
             }
